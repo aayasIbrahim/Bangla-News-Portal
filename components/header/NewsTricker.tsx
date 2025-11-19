@@ -39,7 +39,7 @@ const NewsTicker = () => {
         }
       `}</style>
 
-      <section className="sm:py-1 sm:m-[10px]"> 
+      <section className="py-0 sm:py-1 sm:m-[10px]"> 
         <div className="container mx-auto flex items-center overflow-hidden">
           
           {/* LEFT LABEL */}

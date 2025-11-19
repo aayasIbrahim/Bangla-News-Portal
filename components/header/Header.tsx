@@ -6,13 +6,14 @@ import AdvertisementBanner from "./AdvertisementBanner";
 
 function Header() {
   return (
-    <header className="bg-white border-b border-gray-500 py-5">
+    <header className="bg-white py-5">
       <TopBar />
       <div className="mt-[12px] border-b-[3px] border-black">
       </div>
       <NavBar/>
       <NewsTicker/>
       <AdvertisementBanner/>
+    
     </header>
   );
 }

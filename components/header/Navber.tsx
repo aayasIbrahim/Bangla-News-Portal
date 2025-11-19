@@ -76,7 +76,7 @@ const NavMenu: React.FC<NavMenuProps> = ({
       <a
         href={specialItem.href}
         className={`text-red-600 hover:text-red-700 transition font-bold text-sm border-b-2 border-red-600 ${
-          isMobile ? "block text-center w-full" : ""
+          isMobile ? "block text-center w-full " : ""
         }`}
       >
         {specialItem.name}

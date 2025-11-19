@@ -5,20 +5,20 @@ function TopBar() {
   return (
     <div className="container mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center px-5 py-4 gap-4">
       {/* Logo */}
-      <div className="ms-5 flex-shrink-0 ">
+      <div className="flex justify-center sm:justify-start flex-shrink-0 w-full sm:w-auto">
         <Image
-          src="/logo/Group 71.png"
+          src="/logo/logo news24 (1).gif"
           alt="Logo"
-          width={294}
-          height={75}
-          className="object-contain text-center " 
+          width={194}
+          height={95}
+          className="object-contain "
         />
       </div>
 
       {/* Right Section: Date above Search */}
       <div className="flex flex-col w-full sm:w-auto gap-2">
         {/* Date */}
-        <p className="font-solaiman font-normal text-gray-700 text-[14px] sm:text-[15px] md:text-[16px] lg:text-[17px] xl:text-[18px] leading-relaxed text-justify text-center sm:text-left">
+        <p className="font-solaiman font-normal text-gray-700 text-[14px] sm:text-[15px] md:text-[16px] lg:text-[17px] xl:text-[18px] leading-relaxed text-center sm:text-left">
           {getAllDates()}
         </p>
 

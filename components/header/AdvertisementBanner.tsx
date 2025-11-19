@@ -20,7 +20,7 @@ const AdvertisementBanner: React.FC = () => {
 
   return (
     <div
-      className={`w-full my-4 flex justify-center relative transition-opacity duration-300 ${
+      className={`w-full my-4 flex justify-center relative transition-opacity duration-300  border-b border-gray-500  ${
         closing ? "opacity-0" : "opacity-100"
       }`}
       style={{ fontFamily: `"Noto Sans Bengali", "Inter", sans-serif` }}
@@ -37,13 +37,13 @@ const AdvertisementBanner: React.FC = () => {
           alt={altText}
           width={970}
           height={130}
-          className="w-full max-w-[970px] h-auto sm:h-[80px] md:h-[100px] lg:h-[120px] object-cover rounded-md shadow-sm"
+          className="w-full max-w-[970px] h-auto sm:h-[80px] md:h-[100px] lg:h-[120px] object-cover mb-5 rounded-md shadow-sm"
         />
       </a>
 
       <button
         onClick={handleClose}
-        className="absolute top-2 right-[20%] bg-black/50 text-white rounded-full px-2 py-1 text-sm hover:bg-black/70 transition"
+        className="absolute top-2 right-2 sm:right-[20%] bg-black/50 text-white rounded-full px-2 py-1 text-sm hover:bg-black/70 transition"
         aria-label="Close Advertisement"
       >
         ✕
