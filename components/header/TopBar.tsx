@@ -5,13 +5,13 @@ function TopBar() {
   return (
     <div className="container mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center px-5 py-4 gap-4">
       {/* Logo */}
-      <div className="flex-shrink-0">
+      <div className="ms-5 flex-shrink-0 ">
         <Image
           src="/logo/Group 71.png"
           alt="Logo"
           width={294}
           height={75}
-          className="object-contain"
+          className="object-contain text-center " 
         />
       </div>
 

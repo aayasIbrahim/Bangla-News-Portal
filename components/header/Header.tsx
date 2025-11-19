@@ -1,5 +1,6 @@
 import React from "react";
 import TopBar from "./TopBar";
+import NavBar from "./Navber";
 
 function Header() {
   return (
@@ -7,6 +8,7 @@ function Header() {
       <TopBar />
       <div className="mt-[12px] border-b-[3px] border-black">
       </div>
+      <NavBar/>
     </header>
   );
 }
