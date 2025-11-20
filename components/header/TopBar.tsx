@@ -1,18 +1,12 @@
 import { getAllDates } from "@/utils/GetAlldate";
 import { CiSearch } from "react-icons/ci";
-import Image from "next/image";
+import Logo from "../Logo";
 function TopBar() {
   return (
     <div className="container mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center px-5 py-4 gap-4">
       {/* Logo */}
       <div className="flex justify-center sm:justify-start flex-shrink-0 w-full sm:w-auto">
-        <Image
-          src="/logo/logo news24 (1).gif"
-          alt="Logo"
-          width={194}
-          height={95}
-          className="object-contain "
-        />
+       <Logo/>
       </div>
 
       {/* Right Section: Date above Search */}
