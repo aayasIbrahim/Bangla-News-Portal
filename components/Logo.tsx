@@ -5,7 +5,7 @@ function Logo() {
   return (
     <div className="flex justify-center sm:justify-start flex-shrink-0 w-full sm:w-auto">
       <Image
-        src="/logo/tsb logo 3.png"
+        src="/logo/vision.jpg"
         alt="Logo"
         width={194}
         height={95}
