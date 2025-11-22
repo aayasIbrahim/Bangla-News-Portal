@@ -219,7 +219,7 @@ const NavBar: React.FC = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 text-gray-600 hover:text-red-600 transition "
+              className=" md:hidden p-2 text-gray-600 hover:text-red-600 transition "
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle Menu"
             >
@@ -241,7 +241,7 @@ const NavBar: React.FC = () => {
         <div
           className={`md:hidden transition-all duration-300 overflow-hidden ${
             isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-          } bg-white border-b shadow-lg p-4`}
+          } bg-white  shadow-lg p-4`}
         >
           <div className="flex flex-col space-y-4">
             <NavMenu items={menuItems} specialItem={specialLink} isMobile />

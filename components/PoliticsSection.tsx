@@ -4,10 +4,7 @@ import FeaturedArticle from "./politics/FeaturedArticle";
 import { DUMMY_DATA } from "@/data/politicsData";
 import VerticalArticleCard from "./politics/VerticalArticleCard";
 import AdCard from "./headlines/AdCard";
-import SmallNewsCard from "./headlines/SmallNewsCard";
-
-
-
+import SectionHeader from "./ui/SectionHeader";
 
 const PoliticsSection: React.FC = () => {
   const { featuredArticle, miniArticles } = DUMMY_DATA;
@@ -22,21 +19,7 @@ const PoliticsSection: React.FC = () => {
     // Outer container: Full width, centered max-width, general padding
     <div className="container mx-auto px-4 py-6 font-sans bg-white min-h-screen">
       {/* Section Header */}
-     <h2 className="text-2xl font-bold text-gray-900 border-b-2 border-gray-600 pb-2 mb-6 flex items-center">
-          রাজনীতি
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5 ml-2 text-red-600"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </h2>
+      <SectionHeader title="রাজনীতি" />
       {/* Main Grid Layout: 3/4 for content, 1/4 for sidebar */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {/* Left Column: Main Content (3/4 width on large screens) */}
@@ -56,22 +39,17 @@ const PoliticsSection: React.FC = () => {
             {bottomColumnArticles.map((article) => (
               // Using the specialized VerticalArticleCard for the two articles at the bottom-left
               <VerticalArticleCard key={article.id} {...article} />
-
             ))}
-            
           </div>
         </div>
 
- 
-        
-            <AdCard
-              ad={{
-                title: "ঈদ অফার",
-                details: "বিশেষ ছাড়!",
-                imageUrl: "/ads/image.png",
-              }}
-            ></AdCard>
-            
+        <AdCard
+          ad={{
+            title: "ঈদ অফার",
+            details: "বিশেষ ছাড়!",
+            imageUrl: "/ads/image.png",
+          }}
+        ></AdCard>
       </div>
     </div>
   );
