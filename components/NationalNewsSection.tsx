@@ -7,6 +7,7 @@ import SidebarNewsCard from "./NationalNewsSection/SidebarNewsCard";
 import { NationalNewsdata, NationalNewsdataAritcalData } from "@/data/Data";
 import AdCard from "./headlines/AdCard";
 import SectionHeader from "./ui/SectionHeader";
+import AdvertisementBanner from "./header/AdvertisementBanner";
 
 const NationalNewsSection = () => {
   return (
@@ -36,6 +37,7 @@ const NationalNewsSection = () => {
             ></AdCard>
           </div>
         </div>
+        <AdvertisementBanner/>
       </div>
     </section>
   );

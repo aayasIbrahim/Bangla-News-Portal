@@ -9,6 +9,7 @@ import {
   leftColumnNews,
   rightSidebarList,
 } from "@/data/Data";
+import AdvertisementBanner from "./header/AdvertisementBanner";
 
 export default function HeaderSection() {
   return (
@@ -48,6 +49,7 @@ export default function HeaderSection() {
           ))}
         </div>
       </div>
+      <AdvertisementBanner/>
     </section>
   );
 }

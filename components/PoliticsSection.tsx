@@ -5,6 +5,7 @@ import { DUMMY_DATA } from "@/data/politicsData";
 import VerticalArticleCard from "./politics/VerticalArticleCard";
 import AdCard from "./headlines/AdCard";
 import SectionHeader from "./ui/SectionHeader";
+import AdvertisementBanner from "./header/AdvertisementBanner";
 
 const PoliticsSection: React.FC = () => {
   const { featuredArticle, miniArticles } = DUMMY_DATA;
@@ -51,6 +52,7 @@ const PoliticsSection: React.FC = () => {
           }}
         ></AdCard>
       </div>
+      <AdvertisementBanner/>
     </div>
   );
 };
