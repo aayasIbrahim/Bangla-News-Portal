@@ -1,5 +1,7 @@
-import HeaderSection from "@/components/headlines/HeadlineSection";
-import NationalNewsSection from "@/components/NationalNewsSection/NationalNewsSection";
+import HeaderSection from "@/components/HeadlineSection";
+import NationalNewsSection from "@/components/NationalNewsSection";
+import PoliticsSection from "@/components/PoliticsSection";
+
 import React from "react";
 
 export default function Page() {
@@ -7,6 +9,7 @@ export default function Page() {
     <>
       <HeaderSection />
       <NationalNewsSection />
+      <PoliticsSection/>
     </>
   );
 }

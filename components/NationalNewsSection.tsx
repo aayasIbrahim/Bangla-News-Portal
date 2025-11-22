@@ -1,15 +1,13 @@
 "use client";
 
 import React from "react";
-import MainArticle from "./MainArticle";
-import SidebarNewsCard from "./SidebarNewsCard";
+import MainArticle from "./NationalNewsSection/MainArticle";
+import SidebarNewsCard from "./NationalNewsSection/SidebarNewsCard";
 // import { SidebarAds } from './SidebarAds';
 import { NationalNewsdata, NationalNewsdataAritcalData } from "@/data/Data";
-import AdCard from "../headlines/AdCard";
+import AdCard from "./headlines/AdCard";
 
 const NationalNewsSection = () => {
-
-
   return (
     <section>
       <div className="container  mx-auto p-4 sm:p-6 font-sans min-h-screen">
@@ -39,7 +37,6 @@ const NationalNewsSection = () => {
                   key={item.id}
                   title={item.title}
                   imageSrc={item.imageSrc}
-    
                 />
               ))}
             </div>

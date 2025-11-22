@@ -2,7 +2,7 @@
 import React from "react";
 import { MapPin, Phone, Mail, ChevronUp } from "lucide-react";
 import Image from "next/image";
-import Logo from "../Logo";
+import Logo from "../header/Logo";
 
 const footerLinks = [
   ["সর্বশেষ", "বিশ্ব", "খেলা", "চাকরি"],
@@ -70,7 +70,7 @@ const NewsFooter = () => {
           <div className="md:col-span-2 flex justify-center md:justify-end mt-8 md:mt-0">
             <div className="text-center md:text-right w-full md:w-auto">
               <h2 className="text-lg font-bold mb-4">
-                ভারপ্রাপ্ত সম্পাদক: এম ডি{" "} বাইজীদ
+                ভারপ্রাপ্ত সম্পাদক: এম ডি বাইজীদ
               </h2>
               <ul className="space-y-3 text-sm mb-6">
                 <li className="flex items-center justify-center md:justify-end">

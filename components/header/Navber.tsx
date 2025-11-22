@@ -30,7 +30,7 @@ interface NavMenuProps {
 const menuItems: MenuItem[] = [
   { name: "সর্বশেষ", href: "#latest" },
   { name: "রাজনীতি", href: "#politics" },
-  { name: "বাংলাদেশ", href: "#bangladesh" },
+  { name: "জাতীয়", href: "#national" },
   { name: "অপরাধ", href: "#crime" },
   { name: "বিশ্ব", href: "#world" },
   { name: "বাণিজ্য", href: "#business" },
