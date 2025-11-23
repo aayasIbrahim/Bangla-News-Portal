@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import MainArticle from "./NationalNewsSection/MainArticle";
-import SidebarNewsCard from "./NationalNewsSection/SidebarNewsCard";
-// import { SidebarAds } from './SidebarAds';
+import MainArticle from "./NationalNews/MainArticle";
+import SidebarNewsCard from "./NationalNews/SidebarNewsCard";
+
 import { NationalNewsdata, NationalNewsdataAritcalData } from "@/data/Data";
 import AdCard from "./headlines/AdCard";
 import SectionHeader from "./ui/SectionHeader";
