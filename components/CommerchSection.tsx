@@ -39,13 +39,12 @@ const DUMMY_DATA: Article[] = [
     image: "/nation/image (5).png",
   }, // Dollar
 ];
-console.log(DUMMY_DATA);
 
 const CommerceSection: React.FC = () => {
   const mainArticle = DUMMY_DATA[0];
   const rightArticles = DUMMY_DATA.slice(1); // The four articles on the right
 
-  return (
+  return ( 
     <section className="bg-white min-h-screen">
       <div className="p-4 sm:p-8  container mx-auto">
         {/* Section Header */}
@@ -58,7 +57,6 @@ const CommerceSection: React.FC = () => {
           {/* LEFT LARGE ARTICLE CARD */}
           <div className="lg:col-span-2 lg:row-span-2">
             {" "}
-            {/* Takes 2 columns and 2 rows on large screens */}
             {mainArticle && <CommerceMainCard article={mainArticle} />}
           </div>
 
@@ -66,7 +64,6 @@ const CommerceSection: React.FC = () => {
           {rightArticles.map((article) => (
             <div key={article.id} className="lg:col-span-2">
               {" "}
-              {/* Each takes 2 columns on large screens */}
               <CommerceStandardCard article={article} />
             </div>
           ))}

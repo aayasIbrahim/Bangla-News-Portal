@@ -1,14 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Menu,
-  X,
-  Facebook,
-  Youtube,
-  Instagram,
-  MessageCircle,
-} from "lucide-react";
+import AuthSection from "./Nav/AuthSection";
+import SocialIcons from "./Nav/SocialIcon";
+
+import { Menu, X } from "lucide-react";
 
 // ----------------------
 // ⭐ Types
@@ -31,16 +27,9 @@ const menuItems: MenuItem[] = [
   { name: "সর্বশেষ", href: "#latest" },
   { name: "রাজনীতি", href: "#politics" },
   { name: "জাতীয়", href: "#national" },
-  { name: "অপরাধ", href: "#crime" },
   { name: "বিশ্ব", href: "#world" },
   { name: "বাণিজ্য", href: "#business" },
-  { name: "মতামত", href: "#opinion" },
   { name: "খেলা", href: "#sports" },
-  { name: "বিজ্ঞান", href: "#science" },
-  { name: "চাকরি", href: "#jobs" },
-  { name: "জীবনযাপন", href: "#lifestyle" },
-  { name: "বিচিত্র", href: "#variety" },
-
 ];
 
 const specialLink: MenuItem = { name: "ই-পেপার", href: "#epaper" };
@@ -85,57 +74,6 @@ const NavMenu: React.FC<NavMenuProps> = ({
   </ul>
 );
 
-// ----------------------
-// ⭐ Social Icons
-// ----------------------
-
-const SocialIcons: React.FC = () => (
-  <div className="flex items-center justify-center space-x-3 text-gray-500">
-    <a
-      href="#"
-      aria-label="Facebook"
-      className="hover:text-blue-600 transition"
-    >
-      <Facebook size={18} />
-    </a>
-    <a
-      href="#"
-      aria-label="WhatsApp"
-      className="hover:text-green-500 transition"
-    >
-      <MessageCircle size={18} />
-    </a>
-    <a href="#" aria-label="YouTube" className="hover:text-red-500 transition">
-      <Youtube size={18} />
-    </a>
-    <a
-      href="#"
-      aria-label="Instagram"
-      className="hover:text-pink-600 transition"
-    >
-      <Instagram size={18} />
-    </a>
-  </div>
-);
-
-// ----------------------
-// ⭐ Auth Section
-// ----------------------
-
-const AuthSection: React.FC = () => (
-  <div className="flex space-x-0 ml-4">
-    <button className="px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition rounded-l-lg">
-      Eng
-    </button>
-    <button className="px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition rounded-r-lg">
-      Login
-    </button>
-  </div>
-);
-
-// ----------------------
-// ⭐ Main Navbar
-// ----------------------
 
 const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -152,66 +90,13 @@ const NavBar: React.FC = () => {
           <div className="flex justify-between items-center container mx-auto w-full">
             <div className="w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 sm:hidden">
               <ul className="flex space-x-6 whitespace-nowrap py-2">
-                <li>
-                  <a href="#" className="hover:text-red-600">
-                    সর্বশেষ
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-red-600">
-                    রাজনীতি
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-red-600">
-                    বাংলাদেশ
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-red-600">
-                    অপরাধ
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-red-600">
-                    বিশ্ব
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-red-600">
-                    বাণিজ্য
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-red-600">
-                    মতামত
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-red-600">
-                    খেলা
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-red-600">
-                    বিজ্ঞান
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-red-600">
-                    চাকরি
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-red-600">
-                    জীবনযাপন
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-red-600">
-                    বিচিত্র
-                  </a>
-                </li>
+                {menuItems.map((item) => (
+                  <li key={item.name}>
+                    <a href={item.href} className="hover:text-red-600">
+                      {item.name}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
 

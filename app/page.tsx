@@ -6,7 +6,6 @@ import NationalNewsSection from "@/components/NationalNewsSection";
 import PoliticsSection from "@/components/PoliticsSection";
 import WorldSection from "@/components/WorldSection";
 
-import React from "react";
 
 export default function Page() {
   return (
