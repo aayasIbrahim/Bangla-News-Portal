@@ -57,7 +57,7 @@ export default function RegisterPage() {
             onChange={(e) => setFullName(e.target.value)}
             required
             className="px-4 py-3 rounded-lg bg-white border border-gray-600 text-black focus:outline-none focus:ring-2 focus:ring-gray-500"
-          />
+          />  
           <input
             type="email"
             placeholder="Email"
