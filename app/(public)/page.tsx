@@ -1,3 +1,4 @@
+// app/(public)/layout.tsx
 import CommerceSection from "@/components/CommerceSection";
 import EntertainmentSection from "@/components/EntertainmentSection";
 import HeaderSection from "@/components/HeadlineSection";
@@ -11,6 +12,7 @@ import AdvertisementBanner from "@/components/AdvertisementBanner";
 export default function Page() {
   return (
     <>
+
       <NewsTicker />
       <AdvertisementBanner />
       <HeaderSection />

@@ -54,16 +54,23 @@ const NavBar: React.FC = () => {
   const isAdmin = role === "admin";
 
   // Dynamically create menu items based on role
-  const menuItems: MenuItem[] = [
-    { name: "সর্বশেষ", href: "/" },
-    { name: "রাজনীতি", href: "/politics" },
-    { name: "জাতীয়", href: "/national" },
-    { name: "বাংলাদেশ", href: "/bangladesh" },
-    { name: "বিশ্ব", href: "/world" },
-    { name: "বাণিজ্য", href: "/business" },
-    { name: "খেলা", href: "/sports" },
-    ...(isAdmin ? [{ name: "Add News", href: "/addnews", isAdmin: true }] : []),
-  ];
+const menuItems: MenuItem[] = [
+  { name: "সর্বশেষ", href: "/" },
+  { name: "রাজনীতি", href: "/politics" },
+  { name: "জাতীয়", href: "/national" },
+  { name: "বাংলাদেশ", href: "/bangladesh" },
+  { name: "বিশ্ব", href: "/world" },
+  { name: "বাণিজ্য", href: "/business" },
+  { name: "খেলা", href: "/sports" },
+
+  // Only show when admin = true
+  ...(isAdmin
+    ? [
+        { name: "সংবাদ যুক্ত করুন", href: "/admin/addnews", isAdmin: true },
+        { name: "অ্যাডমিন প্যানেল", href: "/admin/dashboard", isAdmin: true },
+      ]
+    : []),
+]
 
   const specialLink: MenuItem = { name: "ই-পেপার", href: "/" };
 

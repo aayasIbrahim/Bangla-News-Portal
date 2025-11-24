@@ -23,5 +23,5 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/addnews"], // যেই route-এ apply করতে চাই
+  matcher: ["/admin"], // যেই route-এ apply করতে চাই
 };
