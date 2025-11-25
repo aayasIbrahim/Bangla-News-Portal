@@ -23,5 +23,10 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin"], // যেই route-এ apply করতে চাই
+  matcher: [
+    "/dashboard/:path*", 
+    "/addnews/:path*",
+    "/newslist/:path*",
+    "/users/:path*",
+  ],
 };

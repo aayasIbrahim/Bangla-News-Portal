@@ -12,7 +12,6 @@ import {
   MdHome,
 } from "react-icons/md";
 
-// 1. Sidebar Link Data Structure (TypeScript)
 interface SidebarLink {
   id: number;
   label: string;
