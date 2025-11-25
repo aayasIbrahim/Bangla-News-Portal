@@ -12,7 +12,6 @@ import AdvertisementBanner from "@/components/AdvertisementBanner";
 export default function Page() {
   return (
     <>
-
       <NewsTicker />
       <AdvertisementBanner />
       <HeaderSection />
