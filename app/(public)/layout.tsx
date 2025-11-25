@@ -17,11 +17,7 @@ export default function PublicLayout({
       {/* 1. Header (যা TopBar এবং স্ক্রলযোগ্য NavBar ধারণ করে) */}
       <Header /> 
       
-      {/* 2. Main Content */}
-      {/* NavBar যখন fixed হয়, তখন Main Content-কে ঢেকে ফেলে। 
-         Header এর নিচে সঠিক স্পেস নিশ্চিত করতে এখানে একটি Padding/Margin-টপ ব্যবহার করা উচিত।
-         নিচে আমি একটি ডামি ক্লাস ব্যবহার করছি, আপনি আপনার NavBar-এর উচ্চতা অনুযায়ী এটি পরিবর্তন করবেন। 
-      */}
+      
       <main className=""> 
         {/* এই Padding-টপ NavBar-এর উচ্চতা অনুযায়ী দিন */}
         {children}

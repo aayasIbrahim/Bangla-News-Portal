@@ -21,8 +21,8 @@ interface SidebarLink {
 
 const SIDEBAR_LINKS: SidebarLink[] = [
   { id: 1, label: 'ড্যাশবোর্ড', icon: MdDashboard, href: '/dashboard' },
-  { id: 2, label: 'আর্টিকেল', icon: MdArticle, href: '/addnews' },
-  { id: 3, label: 'ক্যাটাগরি/ট্যাগ', icon: MdCategory, href: '/categories' },
+  { id: 2, label: 'Add News', icon: MdArticle, href: '/addnews' },
+  { id: 3, label: 'News list', icon: MdCategory, href: '/newslist' },
   { id: 4, label: 'ব্যবহারকারী', icon: MdPeople, href: '/users' },
 ];
 

@@ -7,11 +7,23 @@ import { INews } from "@/types/news";
 // GET all news
 
 // GET all news
+
 export async function GET() {
   await dbConnect();
-  const news = await News.find({});
-  return NextResponse.json({ success: true, data: news });
+
+  try {
+    const news = await News.find({}).sort({ createdAt: -1 }); // Latest first
+    return NextResponse.json({ success: true, data: news });
+  } catch (error) {
+    console.log("GET News Error:", error);
+    return NextResponse.json(
+      { success: false, message: "Failed to fetch news" },
+      { status: 500 }
+    );
+  }
 }
+
+
 
 // POST new news
 export async function POST(req: Request) {

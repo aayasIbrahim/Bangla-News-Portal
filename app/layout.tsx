@@ -5,9 +5,11 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/provider/provider";
 
-// Font setup remains the same
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "TSB news",
@@ -24,10 +26,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>
-          {/* CRITICAL: ONLY CHILDREN HERE. Footer and Header are moved to their respective group layouts. */}
-          {children} 
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

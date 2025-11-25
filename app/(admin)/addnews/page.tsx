@@ -2,173 +2,222 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { uploadToCloudinary } from "@/utils/utils";
+import { uploadToCloudinary } from "@/utils/utils"; // Assuming this utility returns the URL/Public ID
 
 const categories = [
-  { name: "রাজনীতি", href: "politics" },
-  { name: "জাতীয়", href: "national" },
-  { name: "বাংলাদেশ", href: "bangladesh" },
-  { name: "বিশ্ব", href: "world" },
-  { name: "বাণিজ্য", href: "business" },
-  { name: "খেলা", href: "sports" },
+  { name: "রাজনীতি", href: "politics" },
+  { name: "জাতীয়", href: "national" },
+  { name: "বাংলাদেশ", href: "bangladesh" },
+  { name: "বিশ্ব", href: "world" },
+  { name: "বাণিজ্য", href: "business" },
+  { name: "খেলা", href: "sports" },
 ];
 
 export default function AddNews() {
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const [formData, setFormData] = useState({
-    title: "",
-    summary: "",
-    category: "",
-    content: "",
-    imageSrc: "",
-    isFeatured: false,
-  });
+  const [formData, setFormData] = useState({
+    title: "",
+    summary: "",
+    category: "",
+    content: "",
+    imageSrc: "",
+    isFeatured: false,
+  });
 
-  // ----------------------- HANDLE TEXT INPUTS -----------------------
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, type, value } = e.target;
-    let newValue: string | boolean = value;
+  // --- Omitted: handleChange (unchanged) ---
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, type, value } = e.target;
+    let newValue: string | boolean = value;
 
-    if (type === "checkbox" && e.target instanceof HTMLInputElement) {
-      newValue = e.target.checked;
+    if (type === "checkbox" && e.target instanceof HTMLInputElement) {
+      newValue = e.target.checked;
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: newValue,
+    }));
+  };
+
+  // --- Omitted: handleImageChange (unchanged) ---
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setImageFile(file);
+    setPreviewUrl(URL.createObjectURL(file));
+  };
+
+  // ----------------------- UPDATED HANDLE SUBMIT -----------------------
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // **Basic Validation Check**
+    if (!formData.title || !formData.summary || !formData.category || !formData.content) {
+        alert("অনুগ্রহ করে শিরোনাম, সংক্ষিপ্ত বিবরণ, বিভাগ এবং বিস্তারিত সংবাদ পূরণ করুন।");
+        return;
+    }
+    if (!imageFile && !formData.imageSrc) {
+        alert("অনুগ্রহ করে একটি ছবি আপলোড করুন।");
+        return;
     }
 
-    setFormData((prev) => ({
-      ...prev,
-      [name]: newValue,
-    }));
-  };
 
-  // ----------------------- HANDLE IMAGE UPLOAD -----------------------
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    try {
+      setLoading(true);
 
-    setImageFile(file);
-    setPreviewUrl(URL.createObjectURL(file));
-  };
+      let uploadedImageUrl = formData.imageSrc;
 
-  // ----------------------- HANDLE SUBMIT -----------------------
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+      // 1. Cloudinary-তে ছবি আপলোড
+      if (imageFile) {
+        // assumed uploadToCloudinary returns the publicly accessible URL or Public ID
+        uploadedImageUrl = await uploadToCloudinary(imageFile); 
 
-    try {
-      setLoading(true);
+        if (!uploadedImageUrl) {
+            throw new Error("Cloudinary-তে ছবি আপলোড ব্যর্থ হয়েছে।");
+        }
+      }
 
-      let uploadedImageUrl = formData.imageSrc;
+      const finalData = {
+        ...formData,
+        imageSrc: uploadedImageUrl,
+      };
 
-      if (imageFile) {
-        uploadedImageUrl = await uploadToCloudinary(imageFile);
-      }
+      // 2. API-এর সাথে কানেক্ট করা (ডাটা ব্যাকএন্ডে POST করা)
+      const response = await fetch("/api/news", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(finalData),
+      });
 
-      const finalData = {
-        ...formData,
-        imageSrc: uploadedImageUrl,
-      };
+      if (!response.ok) {
+        // Handle server-side errors (e.g., status 400, 500)
+        throw new Error(`API কল ব্যর্থ হয়েছে: ${response.statusText}`);
+      }
 
-      console.log("Final Submitted Data:", finalData);
+      const result = await response.json();
+      console.log("News created successfully:", result);
 
-      setLoading(false);
+      alert("News submitted successfully!");
 
-      alert("News submitted successfully!");
-
-      // RESET FORM
-      setFormData({
-        title: "",
-        summary: "",
-        category: "",
-        content: "",
-        imageSrc: "",
-        isFeatured: false,
-      });
-      setPreviewUrl("");
-      setImageFile(null);
-    } catch (err) {
-      setLoading(false);
-      console.error("Upload error:", err);
+      // 3. ফর্ম রিসেট
+      setFormData({
+        title: "",
+        summary: "",
+        category: "",
+        content: "",
+        imageSrc: "",
+        isFeatured: false,
+      });
+      setPreviewUrl("");
+      setImageFile(null);
+      
+    } catch (err) {
+      console.error("Submit error:", err);
+      alert(`সংবাদ যুক্ত করতে ব্যর্থ। ত্রুটি: ${err instanceof Error ? err.message : "অজানা ত্রুটি"}`);
+    } finally {
+        setLoading(false);
     }
-  };
+  };
 
- return (
-  <div className="max-w-2xl mx-auto p-5">
-    <h2 className="text-xl font-semibold mb-4">সংবাদ যুক্ত করুন</h2>
+// --- Omitted: return block (unchanged, as the form structure is correct) ---
+ return (
+ <div className="max-w-2xl p-5  bg-white shadow ">
+  <h2 className="text-2xl font-semibold mb-6">সংবাদ যুক্ত করুন</h2>
 
-    <form onSubmit={handleSubmit} className="space-y-4">
-
+  <form onSubmit={handleSubmit}>
+    <ul className="space-y-4 list-none p-0">
       {/* Title */}
-      <input
-        type="text"
-        name="title"
-        placeholder="সংবাদের শিরোনাম"
-        value={formData.title}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded"
-      />
+      <li>
+        <input
+          type="text"
+          name="title"
+          placeholder="সংবাদের শিরোনাম"
+          value={formData.title}
+          onChange={handleChange}
+          className="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        />
+      </li>
 
       {/* Summary */}
-      <textarea
-        name="summary"
-        placeholder="সংক্ষিপ্ত বিবরণ"
-        value={formData.summary}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded"
-      />
+      <li>
+        <textarea
+          name="summary"
+          placeholder="সংক্ষিপ্ত বিবরণ"
+          value={formData.summary}
+          onChange={handleChange}
+          className="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        />
+      </li>
 
       {/* Category */}
-      <select
-        name="category"
-        value={formData.category}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded"
-      >
-        <option value="">বিভাগ নির্বাচন করুন</option>
-        {categories.map((c) => (
-          <option key={c.name} value={c.name}>
-            {c.name}
-          </option>
-        ))}
-      </select>
+      <li>
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          className="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        >
+          <option value="">বিভাগ নির্বাচন করুন</option>
+          {categories.map((c) => (
+            <option key={c.name} value={c.name}>
+              {c.name}
+            </option>
+          ))}
+        </select>
+      </li>
 
       {/* Content */}
-      <textarea
-        name="content"
-        placeholder="বিস্তারিত সংবাদ লিখুন"
-        value={formData.content}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded h-32"
-      />
+      <li>
+        <textarea
+          name="content"
+          placeholder="বিস্তারিত সংবাদ লিখুন"
+          value={formData.content}
+          onChange={handleChange}
+          className="w-full border px-3 py-2 rounded h-32 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </li>
 
       {/* Featured Checkbox */}
-      <label className="flex items-center gap-2">
-        <input
-          type="checkbox"
-          name="isFeatured"
-          checked={formData.isFeatured}
-          onChange={handleChange}
-        />
-        <span>ফিচার্ড সংবাদ</span>
-      </label>
+      <li>
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            name="isFeatured"
+            checked={formData.isFeatured}
+            onChange={handleChange}
+            className="accent-blue-600"
+          />
+          <span>ফিচার্ড সংবাদ</span>
+        </label>
+      </li>
 
       {/* Image Upload */}
-      <div>
+      <li>
         <label className="block mb-1">ছবি আপলোড করুন</label>
         <input
           type="file"
           accept="image/*"
           onChange={handleImageChange}
+          className="w-full"
         />
-      </div>
+      </li>
 
       {/* Image Preview */}
       {previewUrl && (
-        <div className="mt-3 relative inline-block">
+        <li className="relative">
           <Image
             src={previewUrl}
             alt="সংবাদের ছবি"
@@ -183,19 +232,23 @@ export default function AddNews() {
           >
             ✕
           </button>
-        </div>
+        </li>
       )}
 
       {/* Submit Button */}
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full bg-blue-600 text-white py-2 rounded"
-      >
-        {loading ? "আপলোড হচ্ছে..." : "সংবাদ যুক্ত করুন"}
-      </button>
-    </form>
-  </div>
+      <li>
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+        >
+          {loading ? "আপলোড হচ্ছে..." : "সংবাদ যুক্ত করুন"}
+        </button>
+      </li>
+    </ul>
+  </form>
+</div>
+
 );
 
 }

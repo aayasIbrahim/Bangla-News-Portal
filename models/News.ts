@@ -7,8 +7,8 @@ interface INewsDocument extends Omit<INews, "_id">, Document {
 
 const NewsSchema: Schema = new Schema({
   title: { type: String, required: true },
-  summary: { type: String, required: true },
-  content: { type: String },
+  summary: { type: String },
+  content: { type: String,required:true },
   category: { type: String, required: true },
   imageSrc: { type: String,required:true },
   author: { type: String, default: "Admin" },
