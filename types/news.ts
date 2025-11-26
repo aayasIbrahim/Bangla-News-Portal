@@ -12,3 +12,18 @@ export interface INews {
   tags?: string[];
   isFeatured?: boolean;
 }
+
+export interface INewsPayload {
+  _id?: string;            // Optional, only needed for updates
+  title: string;
+  summary: string;
+  category: string;
+  content: string;
+  imageSrc: string;
+  isFeatured?: boolean;
+}
+
+export interface INewsUpdatePayload {
+  id: string;
+  data: Partial<INewsPayload>;
+}

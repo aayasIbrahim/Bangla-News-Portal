@@ -3,29 +3,7 @@ import dbConnect from "@/lib/db";
 import News from "@/models/News";
 import { INews } from "@/types/news";
 
-// export async function GET() {
-//   await dbConnect();
 
-//   try {
-//     // প্রথম add করা news প্রথমে দেখাবে
-//     const news = await News.find({}).sort({ _id: 1 });
-
-//     return NextResponse.json({ success: true, data: news });
-//   } catch (error) {
-//     console.log("GET News Error:", error);
-//     return NextResponse.json(
-//       { success: false, message: "Failed to fetch news" },
-//       { status: 500 }
-//     );
-//   }
-// }
-// app/api/news/route.ts
-
-// import {  NextResponse } from "next/server";
-// import News from "@/models/News";
-// import dbConnect from "@/lib/dbConnect"; // ধরে নিলাম এটি আপনার DB কানেকশন
-
-// GET ফাংশনটি NextRequest গ্রহণ করবে
 export async function GET(request: NextRequest) {
   await dbConnect(); // DB কানেকশন
 

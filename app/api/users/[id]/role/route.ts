@@ -7,8 +7,6 @@ export async function PATCH(
   context: { params: Promise<{ id: string }> }
 ) {
   await dbConnect();
-
-  // ⛔ params is a Promise → FIX: await it
   const { id } = await context.params;
   const { role } = await req.json();
 
