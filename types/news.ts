@@ -27,3 +27,10 @@ export interface INewsUpdatePayload {
   id: string;
   data: Partial<INewsPayload>;
 }
+
+export interface NewsApiResponse {
+  success: boolean;
+  data: INews[];
+  totalCount: number;
+  filteredCount: number;
+}

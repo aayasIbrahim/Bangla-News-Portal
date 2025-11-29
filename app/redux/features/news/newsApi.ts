@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { INews, INewsPayload, INewsUpdatePayload } from "@/types/news";
+import { INews, INewsPayload, INewsUpdatePayload ,NewsApiResponse} from "@/types/news";
 
 export const newsApi = createApi({
   reducerPath: "newsApi",
@@ -7,8 +7,16 @@ export const newsApi = createApi({
   tagTypes: ["News"],
   endpoints: (builder) => ({
     // Get all news
-    getNews: builder.query<INews[], string>({
-      query: (category = "all") => `?category=${encodeURIComponent(category)}`,
+    getNews: builder.query<NewsApiResponse, string>({
+      // <রেসপন্স টাইপ, আর্গুমেন্ট টাইপ>
+      query: (category = "all") => {
+        // category প্যারামিটার ব্যবহার করে query স্ট্রিং তৈরি
+        return {
+          url: `?category=${encodeURIComponent(category)}`,
+          method: "GET",
+        };
+      },
+      // API থেকে আসা ডেটার উপর ভিত্তি করে ট্যাগ সরবরাহ করা
       providesTags: ["News"],
     }),
 

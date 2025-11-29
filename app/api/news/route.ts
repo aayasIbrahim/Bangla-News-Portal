@@ -4,6 +4,8 @@ import News from "@/models/News";
 import { INews } from "@/types/news";
 
 
+// ... (অন্যান্য ইম্পোর্ট)
+
 export async function GET(request: NextRequest) {
   await dbConnect(); // DB কানেকশন
 
@@ -18,10 +20,22 @@ export async function GET(request: NextRequest) {
       query.category = decodeURIComponent(category); // ক্যাটেগরি decode
     }
 
-    // News fetch করা, newest first
+    // 1. **মোট নিউজের সংখ্যা গণনা (Total News Count)**
+    // যদি কোনো ফিল্টার (category) প্রয়োগ না করা হয়, তবে সব নিউজের সংখ্যা গণনা করবে।
+    const totalNewsCount = await News.countDocuments({}); 
+
+    // 2. **ফিল্টার অনুযায়ী নিউজের সংখ্যা গণনা (Filtered News Count)**
+    const filteredNewsCount = await News.countDocuments(query);
+    
+    // 3. News fetch করা, newest first
     const news = await News.find(query).sort({ createdAt: -1 });
 
-    return NextResponse.json({ success: true, data: news });
+    return NextResponse.json({ 
+      success: true, 
+      data: news, 
+      totalCount: totalNewsCount,      // সব নিউজের সংখ্যা 
+      filteredCount: filteredNewsCount // ফিল্টার করা নিউজের সংখ্যা
+    });
   } catch (error) {
     console.error("GET News Error:", error);
     return NextResponse.json(
