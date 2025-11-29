@@ -1,4 +1,5 @@
 
+
 export interface INews {
   _id: string;
   title: string;
@@ -27,9 +28,13 @@ export interface INewsUpdatePayload {
   id: string;
   data: Partial<INewsPayload>;
 }
-
+export interface NewsHeadline {
+  _id: string;
+  title: string;
+}
 export interface NewsApiResponse {
   success: boolean;
+  newsheadline: NewsHeadline[];
   data: INews[];
   totalCount: number;
   filteredCount: number;

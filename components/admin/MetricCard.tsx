@@ -25,8 +25,7 @@ const MetricCard: FC<MetricCardProps> = ({ title, value, icon: IconComponent, co
         <div 
           className={`flex items-center justify-center w-12 h-12 rounded-full ${iconBg} ${textColor} ring-4 ${iconRing}/20`}
         >
-          {/* The IconComponent will be passed as a prop (e.g., a React Feather icon) */}
-          {/* IconComponent-কে তার প্রয়োজনীয় props (className) পাস করা হয়েছে */}
+    
           <IconComponent className="w-6 h-6" />
         </div>
         

@@ -23,6 +23,9 @@ export async function GET(request: NextRequest) {
     // 1. **মোট নিউজের সংখ্যা গণনা (Total News Count)**
     // যদি কোনো ফিল্টার (category) প্রয়োগ না করা হয়, তবে সব নিউজের সংখ্যা গণনা করবে।
     const totalNewsCount = await News.countDocuments({}); 
+    
+    // ⭐ শুধু title ফিল্ড ফেচ করছি
+    const newsheadline = await News.find(query, "title").sort({ createdAt: -1 });
 
     // 2. **ফিল্টার অনুযায়ী নিউজের সংখ্যা গণনা (Filtered News Count)**
     const filteredNewsCount = await News.countDocuments(query);
@@ -33,6 +36,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ 
       success: true, 
       data: news, 
+      newsheadline,
       totalCount: totalNewsCount,      // সব নিউজের সংখ্যা 
       filteredCount: filteredNewsCount // ফিল্টার করা নিউজের সংখ্যা
     });
