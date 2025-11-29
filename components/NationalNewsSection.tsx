@@ -29,7 +29,7 @@ const NationalNewsSection: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Article */}
-        <MainArticle {...main} />
+        <MainArticle {...main}   id={main._id}/>
 
         {/* Sidebar + Ads */}
         <div className="lg:col-span-1 space-y-4">

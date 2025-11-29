@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { INews } from "@/types/news"; // Import your INews type
 
 interface SmallNewsCardProps {
@@ -8,34 +9,36 @@ interface SmallNewsCardProps {
   isTop?: boolean;
 }
 
-const SmallNewsCard = ({ news, isTop = false }: SmallNewsCardProps) => {
+const SmallNewsCard: React.FC<SmallNewsCardProps> = ({ news, isTop = false }) => {
   return (
-    <div className="border-r border-gray-500">
-      <div
-        className={`p-4 border-b me-3 hover:bg-gray-50 transition ${
-          isTop ? "pt-0" : ""
-        }`}
-      >
+    <Link
+      href={`/news/${news._id}`}
+      className={`block border-r border-gray-500 hover:bg-gray-50 transition ${isTop ? "pt-0" : ""}`}
+    >
+      <div className="p-4">
         {/* Image */}
-        <Image
-          src={news.imageSrc} // INews এর imageSrc ব্যবহার
-          alt={news.title}
-          width={264}
-          height={168}
-          className="w-full h-40 object-cover"
-        />
+        <div className="w-full h-40 relative">
+          <Image
+            src={news.imageSrc || "/placeholder.png"} // fallback image
+            alt={news.title}
+            fill
+            className="object-cover rounded"
+          />
+        </div>
 
         {/* Title */}
-        <h2 className="text-lg font-semibold mt-2 hover:text-red-600 cursor-pointer line-clamp-2">
+        <h2 className="text-lg font-semibold mt-2 line-clamp-2 hover:text-red-600 cursor-pointer">
           {news.title}
         </h2>
 
         {/* Summary */}
-        <p className="text-gray-600 text-sm mt-1 line-clamp-3">
-          {news.summary}
-        </p>
+        {news.summary && (
+          <p className="text-gray-600 text-sm mt-1 line-clamp-3">
+            {news.summary}
+          </p>
+        )}
       </div>
-    </div>
+    </Link>
   );
 };
 

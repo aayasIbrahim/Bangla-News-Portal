@@ -1,7 +1,8 @@
-import { NextResponse,NextRequest } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import connectDB from "@/lib/db";
 import News from "@/models/News";
 import mongoose from "mongoose";
+import { error } from "console";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +11,7 @@ export async function GET(
   context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await context.params;  // FIXED
+    const { id } = await context.params; // FIXED
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
@@ -23,29 +24,27 @@ export async function GET(
     }
 
     return NextResponse.json(news.toObject());
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error }, { status: 500 });
   }
 }
 
 // =========================================================
 // ✅ PUT: Update single news
 // =========================================================
-export async function PUT(
-  req: Request,
-  context: { params: { id: string } }
-) {
+export async function PUT(req: Request, context: { params: { id: string } }) {
   try {
-    const { id: newsId } = context.params;
+    // 💡 FIX: Access the 'id' property directly instead of synchronous destructuring
+     const { id } = await context.params
 
-    if (!mongoose.Types.ObjectId.isValid(newsId)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
       return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
     }
 
     await connectDB();
     const data = await req.json();
 
-    const updated = await News.findByIdAndUpdate(newsId, data, {
+    const updated = await News.findByIdAndUpdate(id, data, {
       new: true,
       runValidators: true,
     });
@@ -54,12 +53,13 @@ export async function PUT(
       return NextResponse.json({ error: "News not found" }, { status: 404 });
     }
 
-    return NextResponse.json(updated.toObject());
+    return NextResponse.json(updated.toObject(), { status: 200 }); // Added status 200 for clarity
   } catch (error: unknown) {
     if (error instanceof mongoose.Error.ValidationError) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
-    const message = error instanceof Error ? error.message : "Unknown error";
+    const message =
+      error instanceof Error ? error.message : "Unknown server error occurred";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
@@ -72,7 +72,7 @@ export async function DELETE(
   context: { params: { id: string } }
 ) {
   try {
-    const { id: newsId } = context.params;
+    const { id: newsId } = await context.params;
     console.log("Deleting news id:", newsId);
 
     if (!mongoose.Types.ObjectId.isValid(newsId)) {

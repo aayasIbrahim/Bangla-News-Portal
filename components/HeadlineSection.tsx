@@ -30,13 +30,13 @@ export default function HeaderSection() {
           const news: INews[] = data.data;
 
           // Left Column → latest 5 news
-          setLeftColumnNews(news.slice(0, 3));
+          setLeftColumnNews(news.slice(4, 7));
 
           // Top Headline → latest 3 news
           setTopHeadline(news.slice(0, 3));
 
           // Right Sidebar → featured news (isFeatured = true) or next 5 news
-          const popular = news.filter((n) => n.isFeatured).slice(0, 5);
+          const popular = news.filter((n) => n.isFeatured).slice(7, 9);
           setRightSidebarList(popular.length ? popular : news.slice(3, 8));
         }
       } catch (error) {

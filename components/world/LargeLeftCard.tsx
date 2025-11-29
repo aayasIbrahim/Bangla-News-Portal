@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export interface Article {
   id: number | string;
@@ -14,14 +15,17 @@ interface LargeLeftCardProps {
 
 const LargeLeftCard: React.FC<LargeLeftCardProps> = ({ article }) => {
   return (
-    <div className="bg-white border border-gray-200 relative hover:opacity-90 transition duration-300 cursor-pointer h-auto rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
-      <div className="w-full h-64 md:h-full">
+    <Link
+      href={`/news/${article.id}`}
+      className="block bg-white border border-gray-200 relative hover:opacity-90 transition duration-300 cursor-pointer h-auto rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2"
+    >
+      <div className="w-full h-64 md:h-full relative">
         <Image
-          src={article.image}
+          src={article.image || "/placeholder.png"}
           width={428}
-          height={583.54}
+          height={584}
           alt={article.title}
-          className=" object-cover"
+          className="object-cover"
         />
       </div>
 
@@ -34,7 +38,7 @@ const LargeLeftCard: React.FC<LargeLeftCardProps> = ({ article }) => {
           <p className="text-black text-base line-clamp-3">{article.summary}</p>
         )}
       </div>
-    </div>
+    </Link>
   );
 };
 

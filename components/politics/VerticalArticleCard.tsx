@@ -7,9 +7,9 @@ interface Article {
   summary: string;
   image: string;
 }
-const VerticalArticleCard: React.FC<Article> = ({ image, summary,title }) => (
+const VerticalArticleCard: React.FC<Article> = ({id, image, summary,title }) => (
   <Link
-    href="/"
+      href={`/news/${id}`}
     className="block group border border-gray-200 p-4 rounded-lg hover:shadow-xl transition duration-300 bg-white"
   >
     {/* Image on top */}

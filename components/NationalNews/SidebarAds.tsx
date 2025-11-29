@@ -5,7 +5,7 @@ export const SidebarAds = () => (
     <div className="p-4 bg-yellow-50 rounded-xl shadow-md text-center border border-yellow-200">
       <p className="text-sm font-semibold text-yellow-800">Advertisement</p>
       <div className="h-20 bg-yellow-200 mt-2 flex items-center justify-center rounded-lg">
-        <span className="text-yellow-700 font-bold">VISION OLED TV Ad</span>
+        <span className="text-yellow-700 font-bold">News TV Ad</span>
       </div>
     </div>
 

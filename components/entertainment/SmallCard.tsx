@@ -1,47 +1,41 @@
-// components/SmallCard.tsx
 import React from "react";
-import Image  from "next/image";
+import Link from "next/link";
+import Image from "next/image";
 
 interface Article {
+  id: string | number;
   title: string;
   image: string;
   summary?: string;
-
 }
 
 interface SmallCardProps {
   article: Article;
   isRightAligned?: boolean;
-
 }
 
-const SmallCard: React.FC<SmallCardProps> = ({ article, isRightAligned = false }) => {
-  const { title, image } = article;
-
-  const alignment = isRightAligned ? "flex-row-reverse" : "flex-row";
-
+const SmallCard: React.FC<SmallCardProps> = ({ article, isRightAligned }) => {
   return (
-    <div
-      className={`bg-gray-800 h-28 flex ${alignment} items-center gap-2 overflow-hidden`}
-    >
-      {/* Image Container */}
-      <div className="flex-shrink-0 w-28 h-full overflow-hidden">
-        <Image
-        width={233}
-        height={233}
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover"
-        />
+    <Link href={`/news/${article.id}`}>
+      <div
+        className={`flex gap-3 p-2 bg-white rounded-md hover:shadow-md transition cursor-pointer ${
+          isRightAligned ? "flex-row-reverse" : "flex-row"
+        }`}
+      >
+        <div className="relative w-16 h-16 flex-shrink-0 rounded-md overflow-hidden">
+          <Image
+            src={article.image}
+            alt={article.title}
+            fill
+            className="object-cover"
+            sizes="64px"
+          />
+        </div>
+        <p className="text-gray-900 text-sm font-medium leading-snug">
+          {article.title}
+        </p>
       </div>
-
-      {/* Text */}
-      <div className="p-2">
-        <h3 className="text-sm font-semibold text-white line-clamp-2">
-          {title}
-        </h3>
-      </div>
-    </div>
+    </Link>
   );
 };
 

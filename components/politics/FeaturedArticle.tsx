@@ -1,17 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 interface Article {
-
+  id:string|number
   title: string;
-  summary:string;
+  summary: string;
   image: string;
-
 }
 
-
-const FeaturedArticle: React.FC<Article> = ({ title, image, }) => {
+const FeaturedArticle: React.FC<Article> = ({id, title, image }) => {
   return (
-    <Link href="/" className="block group mb-6 relative">
+    <Link href={`/news/${id}`} className="block group mb-6 relative">
       {/* Image Container */}
       <div className="relative w-full h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] rounded-lg overflow-hidden">
         <Image

@@ -39,11 +39,8 @@ const EntertainmentSection: React.FC = () => {
   if (loading) return <p className="text-center py-10">Loading...</p>;
   if (!news.length) return <p className="text-center py-10">No news found.</p>;
 
-  // Main article: প্রথম article কে main ধরা হলো
   const mainArticle = news[0];
-  // Left column: 2nd, 3rd, 4th
   const leftArticles = news.slice(1, 4);
-  // Right column: 5th, 6th, 7th
   const rightArticles = news.slice(4, 7);
 
   return (
@@ -51,7 +48,6 @@ const EntertainmentSection: React.FC = () => {
       <div className="container mx-auto px-4">
         <SectionHeader title="বিনোদন" className="text-white" />
 
-        {/* GRID LAYOUT */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
           {/* LEFT COLUMN */}
           <ul className="flex flex-col gap-4">
@@ -59,6 +55,7 @@ const EntertainmentSection: React.FC = () => {
               <li key={article._id}>
                 <SmallCard
                   article={{
+                    id: article._id, // ✅ Add id for dynamic routing
                     title: article.title,
                     image: article.imageSrc || "/placeholder.png",
                     summary: article.summary,
@@ -73,6 +70,7 @@ const EntertainmentSection: React.FC = () => {
             <div className="col-span-1 md:col-span-2">
               <MainCard
                 article={{
+                  id: mainArticle._id, // ✅ Pass id
                   title: mainArticle.title,
                   image: mainArticle.imageSrc || "/placeholder.png",
                   summary: mainArticle.summary,
@@ -87,6 +85,7 @@ const EntertainmentSection: React.FC = () => {
               <li key={article._id}>
                 <SmallCard
                   article={{
+                    id: article._id, // ✅ Pass id for dynamic routing
                     title: article.title,
                     image: article.imageSrc || "/placeholder.png",
                     summary: article.summary,

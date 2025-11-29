@@ -1,40 +1,39 @@
-
 import Image from "next/image";
 import Link from "next/link";
+
 interface Article {
   id: string;
   title: string;
-  summary:string
+  summary: string;
   image: string;
-  
 }
 
-const ArticleCard: React.FC<Article> = ({ title, image, summary}) => (
-  // Note: For the last two articles in the image, the layout switches to vertical, 
-  // but for a consistent grid, we keep this horizontal card format for now.
-  <Link href="/" className="flex items-start space-x-4 p-3 hover:bg-gray-50 transition duration-150 border-b border-gray-100">
-    {/* Image Container - Using a placeholder for visual structure */}
-    <div className="flex-shrink-0 w-24 h-16 bg-gray-200 rounded overflow-hidden">
-      {/* In a real app, use <Image /> from 'next/image' */}
+const ArticleCard: React.FC<Article> = ({ id, title, summary, image }) => (
+  <Link
+    href={`/news/${id}`} // ✅ Use id for dynamic routing
+    className="flex items-start space-x-4 p-3 hover:bg-gray-50 transition duration-150 border-b border-gray-100"
+  >
+    {/* Image Container */}
+    <div className="flex-shrink-0 w-24 h-16 rounded overflow-hidden">
       <Image
         src={image}
         alt={title}
-        height={300}
         width={300}
-        className=" object-cover"
-        
+        height={200} // Adjusted for better aspect ratio
+        className="object-cover w-full h-full"
       />
     </div>
-    
+
     {/* Text Content */}
     <div className="flex-grow">
       <h3 className="text-sm font-semibold text-gray-800 leading-snug">
         {title}
       </h3>
-      <h3 className="text-sm font-semibold text-gray-800 leading-snug">
+      <p className="text-xs text-gray-600 mt-1 line-clamp-2">
         {summary}
-      </h3>
+      </p>
     </div>
   </Link>
 );
-export default ArticleCard
+
+export default ArticleCard;

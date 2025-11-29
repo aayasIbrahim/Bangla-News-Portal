@@ -58,6 +58,7 @@ const PoliticsSection: React.FC = () => {
           
           {/* FEATURED HERO ARTICLE */}
           <FeaturedArticle
+          id={featuredArticle._id}
             title={featuredArticle.title}
             summary={featuredArticle.summary}
             image={featuredArticle.imageSrc || "/placeholder.png"}
