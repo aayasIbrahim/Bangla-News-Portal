@@ -6,3 +6,11 @@ export interface IUser {
   createdAt?: string;
   updatedAt?: string;
 }
+export interface IDeleteUserRequest {
+  _id: string;
+}
+
+export interface IDeleteUserResponse {
+  message: string;
+  userId: string;
+}

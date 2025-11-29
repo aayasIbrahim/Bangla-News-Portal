@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import {IUser} from "@/types/user"
-
+import { IUser } from "@/types/user";
 
 export interface IGetUsersResponse {
   users: IUser[];
@@ -16,23 +15,31 @@ export interface IUpdateRoleResponse {
   user: IUser;
 }
 
+export interface IDeleteUserResponse {
+  message: string;
+  userId: string;
+}
+
 /* ------------------ API Slice ------------------ */
 
 export const userApi = createApi({
   reducerPath: "userApi",
+
   baseQuery: fetchBaseQuery({
     baseUrl: "/api",
   }),
+
   tagTypes: ["Users"],
 
   endpoints: (builder) => ({
-    // Get all users
+
+    /* ------------------ GET USERS ------------------ */
     getUsers: builder.query<IGetUsersResponse, void>({
       query: () => `/users`,
       providesTags: ["Users"],
     }),
 
-    // Update user role
+    /* ------------------ UPDATE ROLE ------------------ */
     updateRole: builder.mutation<IUpdateRoleResponse, IUpdateRoleRequest>({
       query: ({ id, role }) => ({
         url: `/users/${id}/role`,
@@ -41,9 +48,23 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["Users"],
     }),
+
+    /* ------------------ DELETE USER ------------------ */
+    deleteUser: builder.mutation<IDeleteUserResponse, string>({
+      query: (id) => ({
+        url: `/users/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Users"],
+    }),
+
   }),
 });
 
-export const { useGetUsersQuery, useUpdateRoleMutation } = userApi;
+/* ------------------ HOOK EXPORT ------------------ */
 
-
+export const {
+  useGetUsersQuery,
+  useUpdateRoleMutation,
+  useDeleteUserMutation,
+} = userApi;
