@@ -24,9 +24,12 @@ export async function proxy(req: NextRequest) {
 //eisob route e user der access nai
 export const config = {
   matcher: [
-    "/dashboard/:path*", 
+    "/dashboard/:path*",
     "/addnews/:path*",
     "/newslist/:path*",
     "/users/:path*",
+    "/videos/:path*",
+    "/settings/:path*",
+    "/ads/:path*",
   ],
 };

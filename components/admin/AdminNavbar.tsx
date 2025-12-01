@@ -14,6 +14,7 @@ import {
   MdSettings,
   MdAdsClick,
   MdKeyboardArrowDown,
+  MdVideoLibrary
 } from "react-icons/md";
 
 interface NavLinkItem {
@@ -28,8 +29,9 @@ const NAV_LINKS: NavLinkItem[] = [
   { id: 5, label: "Public Site", icon: MdHome, href: "/" },
   { id: 2, label: "Add News", icon: MdArticle, href: "/addnews" },
   { id: 3, label: "News list", icon: MdCategory, href: "/newslist" },
-  { id: 7, label: "User", icon: MdPeople, href: "/users" },
+  { id: 8, label: "Videos", icon: MdVideoLibrary, href: "/videos" },
   { id: 6, label: "ADS", icon: MdAdsClick, href: "/ads" },
+  { id: 7, label: "User", icon: MdPeople, href: "/users" },
   { id: 4, label: "Settings", icon: MdSettings, href: "/settings" },
 ];
 

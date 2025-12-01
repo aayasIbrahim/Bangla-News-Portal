@@ -1,6 +1,4 @@
 "use client";
-
-import AddVideoForm from "@/components/admin/AddVideos";
 import ChangePasswordForm from "@/components/admin/ChangePasswordForm";
 
 export default function AdminPage() {
@@ -10,16 +8,8 @@ export default function AdminPage() {
 
       {/* Forms container */}
       <div className="flex flex-col md:flex-row md:space-x-8 space-y-6 md:space-y-0">
-        {/* Change Password Form */}
-  
-       
+        {/* Change Password Form */}     
           <ChangePasswordForm />
-        
-
-        {/* Add Video Form */}
-        
-         
-          <AddVideoForm />
       </div>
 
      
