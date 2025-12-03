@@ -8,12 +8,12 @@ import WorldSection from "@/components/WorldSection";
 import BangladeshSection from "@/components/BangladeshSection";
 import SportsSection from "@/components/SportsSection";
 import NewsTicker from "@/components/NewsTicker";
-import AdvertisementBanner from "@/components/AdvertisementBanner";
+// import AdvertisementBanner from "@/components/AdvertisementBanner";
 export default function Page() {
   return (
     <>
       <NewsTicker />
-      <AdvertisementBanner />
+      {/* <AdvertisementBanner /> */}
       <HeaderSection />
       <NationalNewsSection />
       <CommerceSection />

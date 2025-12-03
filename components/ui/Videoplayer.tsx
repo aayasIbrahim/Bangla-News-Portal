@@ -14,9 +14,8 @@ export default function VideoPlayer() {
   useEffect(() => {
     async function loadVideo() {
       try {
-        const res = await fetch("/api/video "); // make sure your API path is correct
+        const res = await fetch("/api/video")
         const data = await res.json();
-
         const latestVideo: VideoData = data?.data?.[0]; // take latest video
         const id = getYouTubeId(latestVideo?.youtubeUrl);
 
