@@ -89,7 +89,7 @@ const NewsList = ({ onEditClick }: NewsListProps) => {
   };
 
   return (
-    <div className="max-w-7xl p-5 lg:w-full">
+    <div className="max-w-7xl mx-auto  lg:w-full">
       <h2 className="text-2xl font-bold mb-4">সকল সংবাদ</h2>
 
       <div className="flex flex-wrap gap-3 mb-6">

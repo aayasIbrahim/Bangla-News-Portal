@@ -91,7 +91,9 @@ const AdminNavbar: React.FC = () => {
 
           {/* Dropdown */}
           {adminMenu && (
+
             <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md border py-2">
+              
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
                 className="flex items-center space-x-2 w-full px-4 py-2 text-red-500 hover:bg-red-100"
