@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "TSB News",
   description: "বাংলাদেশের সর্বশেষ খবর",
   keywords: ["Bangladesh news", "TSB news", "বাংলাদেশ নিউজ"],
-  // authors: [{ name: "Ayas Ibrahim", url: "https://ayas.com" }],
+  
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "TSB News",
     description: "বাংলাদেশের সর্বশেষ খবর",
-    // url: "https://tsbnews.com",
+    
     siteName: "TSB News",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
     locale: "bn_BD",
@@ -33,7 +33,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "TSB News",
     description: "বাংলাদেশের সর্বশেষ খবর",
-    creator: "@AyasIbrahim",
     images: ["/twitter-image.jpg"],
   },
   themeColor: "#1E40AF",

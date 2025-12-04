@@ -11,12 +11,10 @@ const footerLinks = [
 ];
 
 const bottomLinks = [
-  { name: "বিজ্ঞাপন", href: "#ad" },
-  { name: "আমার দেশ", href: "#about" },
-  { name: "সাবস্ক্রিপশন", href: "#subscribe" },
-  { name: "শর্তাবলি ও নীতিমালা", href: "#terms" },
-  { name: "গোপনীয়তা নীতি", href: "#privacy" },
-  { name: "যোগাযোগ", href: "#contact" },
+  { name: "বিজ্ঞাপন", href: "/ad" },
+  { name: "শর্তাবলি ও নীতিমালা", href: "/termsAndPolicies" },
+  { name: "গোপনীয়তা নীতি", href: "/privacy" },
+
 ];
 
 const NewsFooter = () => {
