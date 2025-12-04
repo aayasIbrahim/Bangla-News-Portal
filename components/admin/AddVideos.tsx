@@ -1,41 +1,42 @@
 "use client";
+
 import { useState } from "react";
+import { useAddVideoMutation } from "@/app/redux/features/youtubeVideo/videoApi";
+
+interface VideoInput {
+  title: string;
+  youtubeUrl: string;
+}
+
+interface ApiError {
+  error: string;
+}
 
 export default function AddVideoForm() {
-  const [title, setTitle] = useState("");
-  const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [youtubeUrl, setYoutubeUrl] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
 
-  const handleSubmit = async (e) => {
+  const [addVideo, { isLoading }] = useAddVideoMutation();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
     setMessage("");
 
+    const videoData: VideoInput = { title, youtubeUrl };
+
     try {
-      const res = await fetch("/api/video", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title,
-          youtubeUrl,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setMessage(`Error: ${data.error}`);
-      } else {
-        setMessage("Video added successfully!");
-        setTitle("");
-        setYoutubeUrl("");
-      }
-    } catch (err) {
+      // unwrap returns the actual response or throws an error
+       await addVideo(videoData).unwrap();
+      
+      setMessage("Video added successfully!");
+      setTitle("");
+      setYoutubeUrl("");
+    } catch (err: unknown) {
+      // Proper type-safe error handling
+      const apiError = err as { data?: ApiError };
+      setMessage(apiError?.data?.error || "Something went wrong!");
       console.error(err);
-      setMessage("Something went wrong!");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -61,10 +62,10 @@ export default function AddVideoForm() {
         />
         <button
           type="submit"
-          disabled={loading}
+          disabled={isLoading}
           className="bg-black text-white px-4 py-2 rounded hover:bg-gray-600"
         >
-          {loading ? "Adding..." : "Add Video"}
+          {isLoading ? "Adding..." : "Add Video"}
         </button>
       </form>
       {message && <p className="mt-2 text-sm">{message}</p>}
