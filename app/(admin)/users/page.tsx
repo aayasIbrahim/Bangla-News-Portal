@@ -75,7 +75,8 @@ export default function User() {
   // ------------------------------------
   return (
     <section className="bg-white min-h-screen p-6">
-      <h1 className="text-gray-900 text-2xl font-semibold mb-6">ব্যবহারকারী পরিচালনা</h1>
+     <div className="container mx-auto">
+       <h1 className="text-gray-900 text-2xl font-semibold mb-6">ব্যবহারকারী পরিচালনা</h1>
 
       <div className="space-y-4">
         {users.map((user) => (
@@ -133,6 +134,7 @@ export default function User() {
           </div>
         ))}
       </div>
+     </div>
     </section>
   );
 }

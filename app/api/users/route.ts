@@ -7,8 +7,9 @@ export async function GET() {
     await dbConnect();
 
     const users = await User.find().sort({ createdAt: -1 });
+    const totalUserCount = await User.countDocuments({});
 
-    return NextResponse.json({ users });
+    return NextResponse.json({ users, totalUser: totalUserCount });
   } catch {
     return NextResponse.json(
       { message: "Failed to fetch users" },
