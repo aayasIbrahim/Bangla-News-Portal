@@ -8,6 +8,8 @@ import SectionHeader from "./ui/SectionHeader";
 import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
 import FullScreenLoading from "./ui/FullScreenLoading";
 
+
+
 const BangladeshSection: React.FC = () => {
   const { data, isLoading, error } = useGetNewsQuery("বাংলাদেশ");
 
@@ -31,6 +33,9 @@ const BangladeshSection: React.FC = () => {
   }));
 
   return (
+    <>
+    
+      
     <section className="bg-white min-h-screen">
       <div className="p-4 sm:p-8 container mx-auto">
         <SectionHeader title="বাংলাদেশ" />
@@ -79,6 +84,7 @@ const BangladeshSection: React.FC = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

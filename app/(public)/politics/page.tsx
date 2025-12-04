@@ -1,10 +1,14 @@
-import PoliticsSection from '@/components/PoliticsSection'
-
+import PoliticsSection from "@/components/PoliticsSection";
+import DynamicTitleFavicon from "@/components/DynamicTitleFavicon";
 
 function page() {
   return (
-    <PoliticsSection/>
-  )
+    <>
+      {" "}
+      <DynamicTitleFavicon title="রাজনীতি" faviconUrl="/favicon.ico" />
+      <PoliticsSection />
+    </>
+  );
 }
 
-export default page
+export default page;

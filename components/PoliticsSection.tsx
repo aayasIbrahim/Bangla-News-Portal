@@ -11,6 +11,7 @@ import FullScreenLoading from "./ui/FullScreenLoading";
 import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
 
 
+
 const PoliticsSection: React.FC = () => {
   // RTK Query → Fetch news based on category "রাজনীতি"
   const { data, isLoading, error } = useGetNewsQuery("রাজনীতি");
@@ -32,6 +33,8 @@ const PoliticsSection: React.FC = () => {
   const bottomColumnArticles = miniArticles.slice(2, 4);
 
   return (
+   <>
+  
     <div className="container mx-auto px-4 py-6 font-sans bg-white min-h-screen">
 
       <SectionHeader title="রাজনীতি" />
@@ -88,7 +91,7 @@ const PoliticsSection: React.FC = () => {
       </div>
 
       <AdvertisementBanner />
-    </div>
+    </div></>
   );
 };
 

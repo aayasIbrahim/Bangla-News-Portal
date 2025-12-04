@@ -1,10 +1,13 @@
-import BangladeshSection from '@/components/BangladeshSection'
-
+import BangladeshSection from "@/components/BangladeshSection";
+import DynamicTitleFavicon from "@/components/DynamicTitleFavicon";
 
 function page() {
   return (
-    <BangladeshSection/>
-  )
+    <>
+      <DynamicTitleFavicon title={"বাংলাদেশ"} faviconUrl="/favicon.ico" />
+      <BangladeshSection />
+    </>
+  );
 }
 
-export default page
+export default page;

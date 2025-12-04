@@ -1,9 +1,13 @@
-import NationalNewsSection from '@/components/NationalNewsSection'
+import NationalNewsSection from "@/components/NationalNewsSection";
+import DynamicTitleFavicon from "@/components/DynamicTitleFavicon";
 
 function page() {
   return (
-    <NationalNewsSection/>
-  )
+    <>
+      <DynamicTitleFavicon title="জাতীয়" faviconUrl="/favicon.ico" />
+      <NationalNewsSection />
+    </>
+  );
 }
 
-export default page
+export default page;

@@ -1,8 +1,11 @@
-import WorldSection from '@/components/WorldSection'
-import React from 'react'
+import WorldSection from "@/components/WorldSection";
+import DynamicTitleFavicon from "@/components/DynamicTitleFavicon";
 
 export default function page() {
   return (
-   <WorldSection/>
-  )
+    <>
+      <DynamicTitleFavicon title="বিশ্ব" faviconUrl="/favicon.ico" />
+      <WorldSection />
+    </>
+  );
 }

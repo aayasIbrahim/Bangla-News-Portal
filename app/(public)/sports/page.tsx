@@ -1,10 +1,13 @@
-import SportsSection from '@/components/SportsSection'
-
+import SportsSection from "@/components/SportsSection";
+import DynamicTitleFavicon from "@/components/DynamicTitleFavicon";
 
 function page() {
   return (
-    <SportsSection/>
-  )
+    <>
+      <DynamicTitleFavicon  title="খেলা" faviconUrl="/favicon.ico" />
+      <SportsSection />
+    </>
+  );
 }
 
-export default page
+export default page;
