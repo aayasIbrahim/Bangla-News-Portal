@@ -48,7 +48,7 @@ export default function HeaderSection() {
           <div className="lg:hidden">
             <VideoPlayer />
           </div>
-          <h2 className="text-xl font-bold mb-3">সর্বশেষ খবর</h2>
+          <h1 className="text-xl font-bold mb-3">সর্বশেষ খবর</h1>
 
           {leftColumnNews.map((news, i) => (
             <SmallNewsCard key={news._id} news={news} isTop={i === 0} />
