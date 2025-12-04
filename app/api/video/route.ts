@@ -85,3 +85,43 @@ function extractVideoId(url: string): string | null {
   const match = url.match(regex);
   return match ? match[1] : null;
 }
+
+
+// -------------------------
+// DELETE: Delete Video by ID
+// -------------------------
+export async function DELETE(req: NextRequest) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "Video ID is required" },
+        { status: 400 }
+      );
+    }
+
+    await connectDB();
+
+    const deletedVideo = await Video.findByIdAndDelete(id);
+
+    if (!deletedVideo) {
+      return NextResponse.json(
+        { error: "Video not found" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(
+      { success: true, message: "Video deleted successfully" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Delete Video Error:", error);
+    return NextResponse.json(
+      { error: "Server error" },
+      { status: 500 }
+    );
+  }
+}

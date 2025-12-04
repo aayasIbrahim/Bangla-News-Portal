@@ -1,10 +1,13 @@
-import AddVideoForm from '@/components/admin/AddVideos'
-import React from 'react'
+import AddVideoForm from "@/components/admin/AddVideos";
+import VideoList from "@/components/admin/VideoList";
 
 function page() {
   return (
-    <AddVideoForm/>
-  )
+    <>
+      <AddVideoForm />
+      <VideoList />
+    </>
+  );
 }
 
-export default page
+export default page;
