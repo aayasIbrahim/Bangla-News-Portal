@@ -1,5 +1,6 @@
 import React from "react";
 import AdminSidebar from "@/components/admin/AdminNavbar";
+import AdminFooter from "@/components/admin/AdminFooter";
 
 export default function AdminLayout({
   children,
@@ -13,6 +14,9 @@ export default function AdminLayout({
         <main className="p-4 sm:p-8  transition-all duration-300 ">
           {children}
         </main>
+        <div className="fixed left-0 bottom-0 w-full">
+          <AdminFooter />
+        </div>
       </div>
     </div>
   );
