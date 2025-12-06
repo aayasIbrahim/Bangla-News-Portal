@@ -1,11 +1,9 @@
 "use client";
 
-import {
-  useState,
-  ChangeEvent,
-  FormEvent,
-} from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { Ad } from "@/types/ads";
+import Image from "next/image";
+import { uploadToCloudinary } from "@/utils/utils";
 
 import {
   useAddAdMutation,
@@ -18,6 +16,7 @@ interface AddAdsProps {
 }
 
 export default function AddAds({ selectedAd, setSelectedAd }: AddAdsProps) {
+  const [file, setFile] = useState<File | null>(null);
   // If editing → use selectedAd data
   const initialForm: Ad = selectedAd || {
     title: "",
@@ -57,24 +56,29 @@ export default function AddAds({ selectedAd, setSelectedAd }: AddAdsProps) {
     e.preventDefault();
 
     try {
+      let imageUrl = form.image;
+
+      // Upload file if a new one is selected
+      if (file) {
+        imageUrl = await uploadToCloudinary(file);
+      }
+
+      const adData = { ...form, image: imageUrl };
+
       if (selectedAd) {
         // UPDATE MODE
-        await updateAd({
-          id: selectedAd._id!,
-          data: form,
-        }).unwrap();
-
+        await updateAd({ id: selectedAd._id!, data: adData }).unwrap();
         alert("Ad updated successfully!");
       } else {
         // ADD MODE
-        await addAd(form).unwrap();
+        await addAd(adData).unwrap();
         alert("Ad added successfully!");
       }
 
-      // Reset to blank state
+      // Reset form
       resetForm(null);
       setSelectedAd(null);
-
+      setFile(null);
     } catch (error) {
       console.error(error);
       alert("Something went wrong!");
@@ -93,10 +97,11 @@ export default function AddAds({ selectedAd, setSelectedAd }: AddAdsProps) {
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-
         {/* Title */}
         <div>
-          <label className="text-gray-700 font-semibold mb-2 block">Ad Title</label>
+          <label className="text-gray-700 font-semibold mb-2 block">
+            Ad Title
+          </label>
           <input
             type="text"
             name="title"
@@ -109,20 +114,34 @@ export default function AddAds({ selectedAd, setSelectedAd }: AddAdsProps) {
 
         {/* Image */}
         <div>
-          <label className="text-gray-700 font-semibold mb-2 block">Image URL</label>
+          <label className="text-gray-700 font-semibold mb-2 block">
+            Upload Image
+          </label>
           <input
-            type="text"
-            name="image"
-            value={form.image}
-            onChange={handleChange}
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              if (e.target.files && e.target.files[0]) {
+                setFile(e.target.files[0]);
+              }
+            }}
             className="border border-gray-300 rounded-lg px-4 py-2 w-full"
-            required
           />
+          {form.image && !file && (
+            <Image
+              src={form.image}
+              alt="Ad"
+              fill
+              className="object-cover rounded"
+            />
+          )}
         </div>
 
         {/* Link */}
         <div>
-          <label className="text-gray-700 font-semibold mb-2 block">Redirect Link</label>
+          <label className="text-gray-700 font-semibold mb-2 block">
+            Redirect Link
+          </label>
           <input
             type="text"
             name="link"
@@ -135,7 +154,9 @@ export default function AddAds({ selectedAd, setSelectedAd }: AddAdsProps) {
 
         {/* Position */}
         <div>
-          <label className="text-gray-700 font-semibold mb-2 block">Ad Position</label>
+          <label className="text-gray-700 font-semibold mb-2 block">
+            Ad Position
+          </label>
           <select
             name="position"
             value={form.position}
@@ -153,7 +174,9 @@ export default function AddAds({ selectedAd, setSelectedAd }: AddAdsProps) {
         {/* Dates */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="text-gray-700 font-semibold mb-2 block">Start Date</label>
+            <label className="text-gray-700 font-semibold mb-2 block">
+              Start Date
+            </label>
             <input
               type="date"
               name="startDate"
@@ -165,7 +188,9 @@ export default function AddAds({ selectedAd, setSelectedAd }: AddAdsProps) {
           </div>
 
           <div>
-            <label className="text-gray-700 font-semibold mb-2 block">End Date</label>
+            <label className="text-gray-700 font-semibold mb-2 block">
+              End Date
+            </label>
             <input
               type="date"
               name="endDate"
