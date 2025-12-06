@@ -5,7 +5,7 @@ import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
 import SectionHeader from "./ui/SectionHeader";
 import MainArticle from "./NationalNews/MainArticle";
 import SidebarNewsCard from "./NationalNews/SidebarNewsCard";
-import AdCard from "./headlines/AdCard";
+// import AdCard from "./headlines/AdCard";
 import AdvertisementBanner from "./AdvertisementBanner";
 import FullScreenLoading from "./ui/FullScreenLoading";
 import { INews } from "@/types/news";
@@ -52,13 +52,13 @@ const NationalNewsSection: React.FC = () => {
               ))}
             </div>
 
-            <AdCard
+            {/* <AdCard
               ad={{
                 title: "ঈদ অফার",
                 details: "বিশেষ ছাড়!",
                 imageUrl: "/ads/image.png",
               }}
-            />
+            /> */}
           </div>
         </div>
 

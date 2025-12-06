@@ -72,7 +72,7 @@ const Advertisement: React.FC = () => {
           <p className="text-blue-600 underline cursor-pointer">
             ইমেইল: tsbvisionnews.net@gmail.com
           </p>
-          <p className="text-blue-600 underline cursor-pointer">ফোন:</p>
+          <p className="text-blue-600 underline cursor-pointer">ফোন: 01929450836</p>
         </section>
       </section>
     </>
