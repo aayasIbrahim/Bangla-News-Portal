@@ -14,29 +14,12 @@ export const metadata: Metadata = {
   title: "TSB News",
   description: "বাংলাদেশের সর্বশেষ খবর",
   keywords: ["Bangladesh news", "TSB news", "বাংলাদেশ নিউজ"],
-  
+
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
   },
-  openGraph: {
-    title: "TSB News",
-    description: "বাংলাদেশের সর্বশেষ খবর",
-    
-    siteName: "TSB News",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
-    locale: "bn_BD",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "TSB News",
-    description: "বাংলাদেশের সর্বশেষ খবর",
-    images: ["/twitter-image.jpg"],
-  },
-  themeColor: "#1E40AF",
-  colorScheme: "light",
 };
 
 export default function RootLayout({
