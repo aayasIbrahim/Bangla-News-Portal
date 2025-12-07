@@ -28,14 +28,14 @@ interface NavLinkItem {
 }
 
 const NAV_LINKS: NavLinkItem[] = [
-  { id: 1, label: "ড্যাশবোর্ড", icon: MdDashboard, href: "/dashboard" },
-  // { id: 5, label: "Public Site", icon: MdHome, href: "/" },
+  { id: 1, label: "Dashboard", icon: MdDashboard, href: "/dashboard" },
   { id: 2, label: "Add News", icon: MdArticle, href: "/addnews" },
   { id: 3, label: "News list", icon: MdCategory, href: "/newslist" },
-  { id: 8, label: "Videos", icon: MdVideoLibrary, href: "/videos" },
-  { id: 6, label: "ADS", icon: MdAdsClick, href: "/ads" },
-  { id: 7, label: "User", icon: MdPeople, href: "/users" },
-  { id: 4, label: "Settings", icon: MdSettings, href: "/settings" },
+  { id: 4, label: "Videos", icon: MdVideoLibrary, href: "/videos" },
+  { id: 5, label: "ADS", icon: MdAdsClick, href: "/ads" },
+  { id: 6, label: "User", icon: MdPeople, href: "/users" },
+  { id: 7, label: "Settings", icon: MdSettings, href: "/settings" },
+  { id: 8, label: "addCategory", icon: MdSettings, href: "/addCategory" },
 ];
 
 const AdminNavbar: React.FC = () => {

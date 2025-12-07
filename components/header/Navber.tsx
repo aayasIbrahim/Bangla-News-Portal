@@ -6,13 +6,18 @@ import SocialIcons from "./Nav/SocialIcon";
 import { useSession } from "next-auth/react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-
+import { useEffect } from "react";
 interface MenuItem {
   name: string;
   href: string;
   isAdmin?: boolean;
 }
 
+interface Category {
+  _id: string;
+  name: string;
+  slug: string;
+}
 interface NavMenuProps {
   items: MenuItem[];
   specialItem: MenuItem;
@@ -57,22 +62,41 @@ const NavMenu: React.FC<NavMenuProps> = ({
 const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
-
   const role = session?.user?.role;
   const isAdmin = role === "admin";
 
-  // Dynamically create menu items based on role
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  // =========================
+  // 🔹 Fetch categories from backend
+  // =========================
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch("/api/category");
+        const data = await res.json();
+        if (res.ok && data.categories) {
+          setCategories(data.categories);
+        } else {
+          console.error("Category API error:", data.error || "Unknown");
+        }
+      } catch (err) {
+        console.error("Failed to fetch categories:", err);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  // =========================
+  // 🔹 Build menuItems dynamically
+  // =========================
   const menuItems: MenuItem[] = [
     { name: "সর্বশেষ", href: "/" },
-    { name: "রাজনীতি", href: "/politics" },
-    { name: "জাতীয়", href: "/national" },
-    { name: "বাংলাদেশ", href: "/bangladesh" },
-    { name: "বিশ্ব", href: "/world" },
-    { name: "বাণিজ্য", href: "/business" },
-    { name: "খেলা", href: "/sports" },
-    { name: "বিনোদন", href: "/entertainment" },
-
-    // Only show when admin = true
+    ...categories.map((c) => ({
+      name: c.name,
+      href: `/category/${c.slug}`,
+    })),
     ...(isAdmin
       ? [
           { name: "অ্যাডমিন প্যানেল", href: "/dashboard", isAdmin: true },

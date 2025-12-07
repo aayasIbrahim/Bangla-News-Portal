@@ -3,11 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { uploadToCloudinary } from "@/utils/utils";
-import {
-  useAddNewsMutation,
-  useUpdateNewsMutation,
-} from "@/app/redux/features/news/newsApi";
-import { INewsPayload } from "@/types/news"; // <- payload type
+import { useAddNewsMutation, useUpdateNewsMutation } from "@/app/redux/features/news/newsApi";
+import { INewsPayload } from "@/types/news";
 
 interface NewsData {
   _id?: string;
@@ -24,15 +21,11 @@ interface NewsFormProps {
   onSuccess: () => void;
 }
 
-const categories = [
-  { name: "রাজনীতি" },
-  { name: "জাতীয়" },
-  { name: "বাংলাদেশ" },
-  { name: "বিশ্ব" },
-  { name: "বাণিজ্য" },
-  { name: "খেলা" },
-  { name: "বিনোদন" },
-];
+interface Category {
+  _id: string;
+  name: string;
+  slug: string;
+}
 
 export default function NewsForm({ initialData, onSuccess }: NewsFormProps) {
   const isEditMode = !!initialData?._id;
@@ -47,6 +40,8 @@ export default function NewsForm({ initialData, onSuccess }: NewsFormProps) {
       isFeatured: false,
     }
   );
+
+  const [categories, setCategories] = useState<Category[]>([]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState(initialData?.imageSrc || "");
   const [loading, setLoading] = useState(false);
@@ -54,17 +49,23 @@ export default function NewsForm({ initialData, onSuccess }: NewsFormProps) {
   const [addNews] = useAddNewsMutation();
   const [updateNews] = useUpdateNewsMutation();
 
+  // 🔹 Fetch categories from backend
   useEffect(() => {
-    if (initialData) {
-      setFormData(initialData);
-      setPreviewUrl(initialData.imageSrc || "");
-    }
-  }, [initialData]);
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch("/api/category");
+        const data = await res.json();
+        setCategories(data.categories || []);
+      } catch (err) {
+        console.error("Category fetch error:", err);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, type, value } = e.target;
     let newValue: string | boolean = value;
@@ -82,12 +83,7 @@ export default function NewsForm({ initialData, onSuccess }: NewsFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (
-      !formData.title ||
-      !formData.summary ||
-      !formData.category ||
-      !formData.content
-    ) {
+    if (!formData.title || !formData.summary || !formData.category || !formData.content) {
       alert("সব ফিল্ড পূরণ করুন।");
       return;
     }
@@ -104,7 +100,6 @@ export default function NewsForm({ initialData, onSuccess }: NewsFormProps) {
         if (!uploadedImageUrl) throw new Error("ছবি আপলোড ব্যর্থ হয়েছে।");
       }
 
-      // ✅ Use INewsPayload type, _id optional
       const submitData: INewsPayload = {
         title: formData.title,
         summary: formData.summary,
@@ -180,7 +175,7 @@ export default function NewsForm({ initialData, onSuccess }: NewsFormProps) {
               >
                 <option value="">বিভাগ নির্বাচন করুন</option>
                 {categories.map((c) => (
-                  <option key={c.name} value={c.name}>
+                  <option key={c._id} value={c.name}>
                     {c.name}
                   </option>
                 ))}
