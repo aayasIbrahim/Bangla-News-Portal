@@ -9,7 +9,7 @@ interface SidebarProps {
 
 const SettingSidebar: React.FC<SidebarProps> = ({ activeTab, tabs }) => {
   return (
-    <aside className="w-64 bg-white border-r p-4 hidden md:block">
+    <aside className="w-64   p-4 h-auto hidden md:block">
       <h2 className="text-2xl font-bold mb-6">Settings</h2>
       <nav className="flex flex-col gap-2">
         {tabs.map((tab) => (
