@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { signOut } from "next-auth/react";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
- 
+
 import {
   MdDashboard,
   MdArticle,
@@ -18,7 +18,7 @@ import {
   MdKeyboardArrowDown,
   MdVideoLibrary,
 } from "react-icons/md";
-
+import Logo from "@/components/ui/Logo";
 
 interface NavLinkItem {
   id: number;
@@ -63,13 +63,7 @@ const AdminNavbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 flex justify-between items-center h-16">
         <div className="flex items-center">
           <Link href="/">
-            <Image
-              src="/logo/TSB Logo[1].png"
-              alt="Logo"
-              width={100}
-              height={95}
-              className="object-contain "
-            />
+            <Logo width={100} height={95} />
           </Link>
         </div>
 
